@@ -1,9 +1,6 @@
 package music;
 
 import javax.sound.midi.*;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 
 public class MusicPlayer {
     private Sequencer controller;
@@ -20,9 +17,9 @@ public class MusicPlayer {
     }
     public Sequencer getController() {return this.controller;}
 
-    public SoundTrack createTrack(Instrument currentInstrument, int volumeAtual) {
+    public SoundTrack createTrack(Instrument currentInstrument, int volumeAtual,int Currentoctave, int CurrentBPM) {
         Track track = this.sequence.createTrack();
-        return new SoundTrack(track,currentInstrument,volumeAtual);
+        return new SoundTrack(track,currentInstrument,volumeAtual, Currentoctave, CurrentBPM);
 
     }
 
@@ -43,6 +40,11 @@ public class MusicPlayer {
         if (controller.isRunning()) {
             controller.stop();
         }
+    }
+
+    public void stop() {
+        controller.stop();
+        controller.setTickPosition(0);
     }
 
     public void restart() {
